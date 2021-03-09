@@ -23,15 +23,16 @@ while (bombe.length < 16) {
 console.log(bombe);
 // chiedo all'utente di inserire un numero
 var numeroUtente;
+var controllo = true;
 var numeriInseriti = [];
-var i = 0;
-while (numeriInseriti.length < 6) {
+while (numeriInseriti.length < 10 && controllo) {
   var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
   // verifico che non inserisca lo stesso numero
   if (numeriInseriti.indexOf(numeroUtente) < 0) {
     numeriInseriti.push(numeroUtente);
+    console.log(numeriInseriti);
   } else {
     alert('Hai perso! Non puoi inserire lo stesso numero per più di una volta');
+    controllo = false;
   }
 }
-console.log(numeriInseriti);
