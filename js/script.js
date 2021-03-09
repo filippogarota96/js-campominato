@@ -11,11 +11,22 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 
 var bombe = [];
 
+// genero i numeri casuali
 function random(min, max) {
-  return Math.floor(Math.random()* (max - min + 1) + min);
-};
+   return Math.floor(Math.random()* (max - min + 1) + min);
+ };
 
+// inserisco i numeri nell'array
 for ( i = 0; i <= 16 - 1; i++) {
   var randomNumber = bombe.push(random(1,100));
 }
+
+// controllo che i numeri siano tutti diversi
+
+for (var i = 0; i < bombe.length; i++) {
+  if (bombe[i] === bombe[i]) {
+     bombe[i] = Math.floor(Math.random() * 100 + 1);
+  }
+}
+
 console.log(bombe);
