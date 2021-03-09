@@ -8,11 +8,11 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 
 
 // creo un array che contiene le bombe
+var bombe = [];
 
 function random(min, max) {
   return Math.floor(Math.random()* (max - min + 1) + min);
 };
-var bombe = [];
 
 while (bombe.length < 16) {
   var randomNumber = random(1, 100);
@@ -24,31 +24,25 @@ console.log(bombe);
 // chiedo all'utente di inserire un numero
 var numeroUtente;
 var controllo = true;
-var numeriInseriti = [];
-
-
-while (numeriInseriti.length < 3 && controllo) {
-  var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
+var numeri = [];
+while (numeri.length <= 84 && controllo) {
+  numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
   // verifico che non inserisca lo stesso numero
-  if (numeriInseriti.indexOf(numeroUtente) < 0) {
-    numeriInseriti.push(numeroUtente);
+  if (numeri.indexOf(numeroUtente) < 0) {
+    numeri.push(numeroUtente);
   } else {
-    alert('Non puoi inserire lo stesso numero per più di una volta');
+    alert('Hai perso! Non puoi inserire lo stesso numero per più di una volta');
+    controllo = false;
   }
-   // controllo se il numero inserito è nella lista bombe
-  for (var i = 0; i < bombe.length; i++) {
-    for (var j = 0; j < numeriInseriti.length; j++) {
-      if (bombe[i] == numeriInseriti[j]) {
-        console.log(controllo);
-        controllo = false;
-        alert('Hai perso, Sei saltato in aria!');
-      }
-      if (numeriInseriti.length == 3){
-        controllo = false;
-        console.log(controllo);
-        alert('Hai vinto!');
-      }
+  // controllo se il numero inserito è nella lista bombe
+    if (bombe.includes(numeroUtente)) {
+      controllo = false;
+      alert('Hai perso!')
     }
-  }
-  console.log(controllo);
+    if (numeri.length == 84){
+      controllo = false;
+      console.log(controllo);
+      alert('Hai vinto!');
+    }
+
 }
