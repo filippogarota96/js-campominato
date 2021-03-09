@@ -20,5 +20,18 @@ while (bombe.length < 16) {
     bombe.push(randomNumber);
   }
 }
-
 console.log(bombe);
+// chiedo all'utente di inserire un numero
+var numeroUtente;
+var numeriInseriti = [];
+var i = 0;
+while (numeriInseriti.length < 6) {
+  var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
+  // verifico che non inserisca lo stesso numero
+  if (numeriInseriti.indexOf(numeroUtente) < 0) {
+    numeriInseriti.push(numeroUtente);
+  } else {
+    alert('Hai perso! Non puoi inserire lo stesso numero per più di una volta');
+  }
+}
+console.log(numeriInseriti);
