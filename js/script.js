@@ -25,27 +25,30 @@ console.log(bombe);
 var numeroUtente;
 var controllo = true;
 var numeriInseriti = [];
+
+
 while (numeriInseriti.length < 3 && controllo) {
   var numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
   // verifico che non inserisca lo stesso numero
   if (numeriInseriti.indexOf(numeroUtente) < 0) {
     numeriInseriti.push(numeroUtente);
-    console.log(numeriInseriti);
   } else {
-    alert('Hai perso! Non puoi inserire lo stesso numero per più di una volta');
-    controllo = false;
+    alert('Non puoi inserire lo stesso numero per più di una volta');
   }
-  // controllo se il numero inserito è nella lista bombe
+   // controllo se il numero inserito è nella lista bombe
   for (var i = 0; i < bombe.length; i++) {
     for (var j = 0; j < numeriInseriti.length; j++) {
-    if (bombe[i] == numeriInseriti[j]) {
-      alert('Hai perso, Sei saltato in aria!')
-      controllo = false;
-    }
-    if (numeriInseriti.length == 3){
-      alert('Hai vinto!');
-      controllo = false;
+      if (bombe[i] == numeriInseriti[j]) {
+        console.log(controllo);
+        controllo = false;
+        alert('Hai perso, Sei saltato in aria!');
+      }
+      if (numeriInseriti.length == 3){
+        controllo = false;
+        console.log(controllo);
+        alert('Hai vinto!');
+      }
     }
   }
-  }
+  console.log(controllo);
 }
