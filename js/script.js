@@ -6,6 +6,14 @@ Se il numero è presente nella lista dei numeri generati, la partita termina, al
 La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.*/
 
+/*all’inizio il software richiede anche una difficoltà all’utente che cambia il range di numeri casuali:
+con difficoltà 0 => tra 1 e 100
+con difficoltà 1 => tra 1 e 80
+con difficoltà 2 => tra 1 e 50*/
+
+
+
+
 
 // funzione che genera un numero random tra un min e un max
 function random(min, max) {
@@ -25,11 +33,31 @@ function includesArray (arr, element) {
   return false;
 };
 
+// Chiedo all'utente di inserire la difficoltà
+do {
+  var livello = parseInt(prompt("Inserisci un numero tra 0 e 2"))
+} while (livello != 0 && livello != 1 && livello != 2 && isNaN(livello))
 // creo un array che contiene le bombe
 var bombe = [];
 
+// trovo il numero massimo di bombe in base al livello
+var maxBombe;
+switch (livello) {
+  case 0:
+    maxBombe = 100;
+  break;
+  case 1:
+    maxBombe = 80;
+  break;
+  case 2:
+    maxBombe = 50;
+  break;
+  default:
+
+}
+
 while (bombe.length < 16) {
-  var randomNumber = random(1, 100);
+  var randomNumber = random(1, maxBombe);
   if (bombe.indexOf(randomNumber) < 0) {
     bombe.push(randomNumber);
   }
@@ -40,12 +68,12 @@ while (bombe.length < 16) {
 var numeroUtente;
 var botto = false;
 var numeri = [];
-
-while (numeri.length < 10 && botto == false) {
-  numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
+var safe = maxBombe - 16;
+while (numeri.length < 84 && botto == false) {
+  numeroUtente = parseInt(prompt('Inserisci un numero'));
   // verifico che non inserisca lo stesso numero
-  if (isNaN(numeroUtente) || numeroUtente < 1 || numeroUtente > 100) {
-    alert('Attento! Inserisci un numero tra 1 e 4!');
+  if (isNaN(numeroUtente) || numeroUtente < 1 || numeroUtente > maxBombe) {
+    alert('Attento! Inserisci un numero tra 1 e', maxBombe + '!' );
   } else if (includesArray(bombe, numeroUtente) == true) {
     botto = true;
   } else if (includesArray(numeri, numeroUtente)) {
