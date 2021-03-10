@@ -7,12 +7,26 @@ La partita termina quando il giocatore inserisce un numero “vietato” o raggi
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.*/
 
 
-// creo un array che contiene le bombe
-var bombe = [];
-
+// funzione che genera un numero random tra un min e un max
 function random(min, max) {
   return Math.floor(Math.random()* (max - min + 1) + min);
 };
+
+
+// creo una funzione che contiene un elemento in array
+function includesArray (arr, element) {
+  var i = 0;
+  while (i < arr.length) {
+    if (arr[i] == element) {
+      return true;
+    }
+    i++
+  }
+  return false;
+};
+
+// creo un array che contiene le bombe
+var bombe = [];
 
 while (bombe.length < 16) {
   var randomNumber = random(1, 100);
@@ -22,27 +36,32 @@ while (bombe.length < 16) {
 }
 console.log(bombe);
 // chiedo all'utente di inserire un numero
+
 var numeroUtente;
-var controllo = true;
+var botto = false;
 var numeri = [];
-while (numeri.length <= 84 && controllo) {
+
+while (numeri.length < 10 && botto == false) {
   numeroUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
   // verifico che non inserisca lo stesso numero
-  if (numeri.indexOf(numeroUtente) < 0) {
-    numeri.push(numeroUtente);
+  if (isNaN(numeroUtente) || numeroUtente < 1 || numeroUtente > 100) {
+    alert('Attento! Inserisci un numero tra 1 e 4!');
+  } else if (includesArray(numeri, numeroUtente)) {
+    alert( 'Non puoi inserire lo stesso numero per più di una volta');
+  } else if (includesArray(bombe, numeroUtente) == true) {
+    botto = true;
   } else {
-    alert('Hai perso! Non puoi inserire lo stesso numero per più di una volta');
-    controllo = false;
+    numeri.push(numeroUtente);
+    console.log(numeri);
   }
-  // controllo se il numero inserito è nella lista bombe
-    if (bombe.includes(numeroUtente)) {
-      controllo = false;
-      alert('Hai perso!')
-    }
-    if (numeri.length == 84){
-      controllo = false;
-      console.log(controllo);
-      alert('Hai vinto!');
-    }
+}
 
+
+// analizzo il punteggio
+
+if (botto = false) {
+  alert('Hai perso! Hai inserito' + numeri.length + 'numeri validi');
+  console.log(bombe);
+} else {
+  console.log("Hai vinto!");
 }
