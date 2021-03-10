@@ -34,7 +34,7 @@ while (bombe.length < 16) {
     bombe.push(randomNumber);
   }
 }
-console.log(bombe);
+
 // chiedo all'utente di inserire un numero
 
 var numeroUtente;
@@ -46,10 +46,10 @@ while (numeri.length < 10 && botto == false) {
   // verifico che non inserisca lo stesso numero
   if (isNaN(numeroUtente) || numeroUtente < 1 || numeroUtente > 100) {
     alert('Attento! Inserisci un numero tra 1 e 4!');
-  } else if (includesArray(numeri, numeroUtente)) {
-    alert( 'Non puoi inserire lo stesso numero per più di una volta');
   } else if (includesArray(bombe, numeroUtente) == true) {
     botto = true;
+  } else if (includesArray(numeri, numeroUtente)) {
+    alert( 'Non puoi inserire lo stesso numero per più di una volta');
   } else {
     numeri.push(numeroUtente);
     console.log(numeri);
@@ -59,8 +59,8 @@ while (numeri.length < 10 && botto == false) {
 
 // analizzo il punteggio
 
-if (botto = false) {
-  alert('Hai perso! Hai inserito' + numeri.length + 'numeri validi');
+if (botto == true) {
+  console.log('Hai perso! Hai inserito',  numeri.length, 'numeri validi');
   console.log(bombe);
 } else {
   console.log("Hai vinto!");
